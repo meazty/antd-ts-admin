@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { ModalForm, ProFormTextArea } from '@ant-design/pro-components';
-import { Alert, Col, Collapse, List, Row, Typography } from 'antd';
+import { ModalForm, ProForm, ProFormTextArea } from '@ant-design/pro-components';
+import { Alert, Col, Collapse, Form, List, Radio, Row, Typography } from 'antd';
 import CategorySelector from './CategorySelector';
+import MyUpload from '@/components/MyUpload';
 
 interface Props {
   open: boolean;
@@ -12,9 +13,12 @@ interface Props {
 
 const { Panel } = Collapse;
 const { Text } = Typography;
+const { Group: RadioGroup } = Radio;
 
 const BatchUploadModal: React.FC<Props> = ({ open, onOpenChange, onFinish, emails }) => {
   const [, setEmailArray] = useState<string[]>([]);
+  const [uploadType, setUploadType] = useState('text');
+  const [localEmails, setLocalEmails] = useState<any>(null);
 
   const handleFinish = async (values: any) => {
     // Split the textarea content by new lines and trim each email
@@ -31,6 +35,16 @@ const BatchUploadModal: React.FC<Props> = ({ open, onOpenChange, onFinish, email
     });
   };
 
+  const handleExcelFinish = async (values: any) => {
+    // 将上传的emails添加到表单数据中
+    const formData = {
+      ...values,
+      emails: localEmails,
+    };
+    console.log('Final form data:', formData);
+    return onFinish(formData); // 调用传入的onFinish，现在传入包含所有数据的formData
+  };
+
   return (
     <ModalForm
       title="批量上传"
@@ -40,20 +54,60 @@ const BatchUploadModal: React.FC<Props> = ({ open, onOpenChange, onFinish, email
         destroyOnClose: true,
         maskClosable: false,
       }}
-      onFinish={handleFinish}
+      onFinish={uploadType === 'text' ? handleFinish : handleExcelFinish}
     >
       <Row gutter={16}>
         <Col span={16}>
-          <ProFormTextArea
-            name="emails"
-            label="批量邮箱（一行一个邮箱）"
-            width="md"
-            rules={[{ required: true, message: '请输入批量邮箱' }]}
-            placeholder="一行一个邮箱"
-            fieldProps={{
-              style: { minHeight: '500px' },
-            }}
-          />
+          <ProForm.Item name="uploadType" label="上传类型">
+            <RadioGroup onChange={(e) => setUploadType(e.target.value)} value={uploadType}>
+              <Radio value="text">批量邮箱（一行一个邮箱）</Radio>
+              <Radio value="file">文件上传</Radio>
+            </RadioGroup>
+          </ProForm.Item>
+          {uploadType === 'text' && (
+            <ProFormTextArea
+              name="emails"
+              label="批量邮箱（一行一个邮箱）"
+              width="md"
+              rules={[{ required: true, message: '请输入批量邮箱' }]}
+              placeholder="一行一个邮箱"
+              fieldProps={{
+                style: { minHeight: '200px' },
+              }}
+            />
+          )}
+          {uploadType === 'file' && (
+            <>
+              <Form.Item required label="客户邮箱" name="emailFile">
+                <MyUpload
+                  accept=".xls,.xlsx"
+                  url="/customers/batch-upload-excel"
+                  onFileUpload={(data: any) => {
+                    console.log('Uploaded resource URL:', data);
+                    setLocalEmails(data); // Assuming 'data' is an array of objects with a 'title' property
+                  }}
+                />
+              </Form.Item>
+              {localEmails?.length > 0 && (
+                <Alert
+                  message="检测到邮箱"
+                  description={
+                    <Collapse>
+                      <Panel header={`点击查看详细 ${localEmails.length} 个邮箱`} key="1">
+                        <List
+                          dataSource={localEmails}
+                          renderItem={(email: string) => <List.Item>{email}</List.Item>}
+                        />
+                      </Panel>
+                    </Collapse>
+                  }
+                  type="info"
+                  showIcon
+                  style={{ marginBottom: '20px' }}
+                />
+              )}
+            </>
+          )}
           <CategorySelector />
         </Col>
         <Col span={8}>

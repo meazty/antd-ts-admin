@@ -11,7 +11,6 @@ import Create from './components/Create';
 import Show from './components/Show';
 import Recharge from './components/Recharge';
 import BatchUploadModal from './components/BatchUploadModal';
-import BatchExcelModal from './components/BatchExcelModal';
 
 /**
  * @en-US Add node
@@ -117,7 +116,6 @@ const TableList: React.FC = () => {
    * */
   const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
   const [batchUploadModalOpen, setBatchUploadModalOpen] = useState<boolean>(false);
-  const [batchUploadExcelModalOpen, setBatchUploadExcelModalOpen] = useState<boolean>(false);
   const [emails, setEmails] = useState<any>(null);
 
   const [showDetail, setShowDetail] = useState<boolean>(false);
@@ -227,15 +225,15 @@ const TableList: React.FC = () => {
           >
             <UploadOutlined /> 批量上传
           </Button>,
-          <Button
-            danger
-            key="batchExcelUpload"
-            onClick={() => {
-              setBatchUploadExcelModalOpen(true);
-            }}
-          >
-            <UploadOutlined /> 表格上传
-          </Button>,
+          // <Button
+          //   danger
+          //   key="batchExcelUpload"
+          //   onClick={() => {
+          //     setBatchUploadExcelModalOpen(true);
+          //   }}
+          // >
+          //   <UploadOutlined /> 表格上传
+          // </Button>,
         ]}
         request={async (params, sort, filter) => queryList('/customers', params, sort, filter)}
         columns={columns}
@@ -317,20 +315,6 @@ const TableList: React.FC = () => {
           const { success, data } = (await handleBatchAdd(values as API.ItemData)) as any;
           if (success && data) {
             setEmails(data);
-            // setBatchUploadModalOpen(false);
-            if (actionRef.current) {
-              actionRef.current.reload();
-            }
-          }
-        }}
-      />
-
-      <BatchExcelModal
-        open={batchUploadExcelModalOpen}
-        onOpenChange={setBatchUploadExcelModalOpen}
-        onFinish={async (values) => {
-          const success = await handleBatchAdd(values as API.ItemData);
-          if (success) {
             // setBatchUploadModalOpen(false);
             if (actionRef.current) {
               actionRef.current.reload();
