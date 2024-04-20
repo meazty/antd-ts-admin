@@ -115,7 +115,7 @@ const BatchUploadModal: React.FC<Props> = ({ open, onOpenChange, onFinish, email
           {emails && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <Alert message={`总邮箱数量: ${emails?.emailList?.length}`} type="info" showIcon />
-              <Alert message={`去复后邮箱数量: ${emails?.emailSet?.length}`} type="info" showIcon />
+              <Alert message={`去重后邮箱数量: ${emails?.emailSet?.length}`} type="info" showIcon />
               <Alert
                 message={`成功上传数量: ${emails?.successes?.length}`}
                 type="success"
