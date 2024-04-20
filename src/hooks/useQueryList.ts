@@ -15,7 +15,7 @@ const useQueryList = (url: string) => {
     query().catch(console.error);
   }, []);
 
-  return { items, setItems };
+  return { items, setItems, query };
 };
 
 export default useQueryList;

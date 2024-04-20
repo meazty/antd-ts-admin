@@ -53,6 +53,20 @@ export default [
     component: './Users',
   },
   {
+    name: 'list.categories',
+    icon: 'table',
+    access: 'canCustomer',
+    path: '/categories',
+    component: './Categories',
+  },
+  {
+    name: 'list.customers',
+    icon: 'table',
+    access: 'canCustomer',
+    path: '/customers',
+    component: './Customers',
+  },
+  {
     path: '/',
     redirect: '/Welcome',
   },
