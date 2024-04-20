@@ -7,9 +7,10 @@ import { UploadProps } from 'antd/lib/upload/interface';
 interface MyUploadProps {
   onFileUpload: (url: string) => void;
   accept?: string; // 使accept属性可选
+  url?: string;
 }
 
-const MyUpload: React.FC<MyUploadProps> = ({ onFileUpload, accept }) => {
+const MyUpload: React.FC<MyUploadProps> = ({ onFileUpload, accept, url = '/upload' }) => {
   // 定义默认的accept值
   const defaultAccept = '*';
 
@@ -19,7 +20,7 @@ const MyUpload: React.FC<MyUploadProps> = ({ onFileUpload, accept }) => {
     formData.append('file', file as Blob);
 
     try {
-      const response = await request<{ success: boolean; data: any }>('/upload', {
+      const response = await request<{ success: boolean; data: string }>(url, {
         method: 'POST',
         data: formData,
         requestType: 'form',
@@ -32,7 +33,7 @@ const MyUpload: React.FC<MyUploadProps> = ({ onFileUpload, accept }) => {
         if (onSuccess) {
           onSuccess(response);
         }
-        const httpUrl = response.data.file; // 假设返回的signedURL就在data字段中
+        const httpUrl = response.data; // 假设返回的signedURL就在data字段中
         onFileUpload(httpUrl);
       } else {
         message.error('上传失败');
@@ -53,6 +54,13 @@ const MyUpload: React.FC<MyUploadProps> = ({ onFileUpload, accept }) => {
     multiple: false,
     customRequest,
     showUploadList: true,
+    beforeUpload: (file) => {
+      const isLessThan2M = file.size / 1024 / 1024 < 6; // 检查文件大小是否小于2MB
+      if (!isLessThan2M) {
+        message.error('文件大小不能超过6MB!');
+      }
+      return isLessThan2M; // 如果文件大于2MB，不上传文件
+    },
     onChange(info) {
       if (info.file.status !== 'uploading') {
         console.log(info.file, info.fileList);

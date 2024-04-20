@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ModalForm, ProFormTextArea } from '@ant-design/pro-components';
 import { Alert, Col, Collapse, List, Row, Typography } from 'antd';
 import CategorySelector from './CategorySelector';
@@ -14,6 +14,23 @@ const { Panel } = Collapse;
 const { Text } = Typography;
 
 const BatchUploadModal: React.FC<Props> = ({ open, onOpenChange, onFinish, emails }) => {
+  const [, setEmailArray] = useState<string[]>([]);
+
+  const handleFinish = async (values: any) => {
+    // Split the textarea content by new lines and trim each email
+    const emails = values.emails
+      .split('\n')
+      .map((email: string) => email.trim())
+      .filter((email: string) => email !== '');
+    setEmailArray(Array.from(new Set(emails))); // Update the state with the array of emails
+
+    // Call the passed onFinish function to handle the submission with the processed data
+    await onFinish({
+      ...values,
+      emails,
+    });
+  };
+
   return (
     <ModalForm
       title="批量上传"
@@ -23,7 +40,7 @@ const BatchUploadModal: React.FC<Props> = ({ open, onOpenChange, onFinish, email
         destroyOnClose: true,
         maskClosable: false,
       }}
-      onFinish={onFinish}
+      onFinish={handleFinish}
     >
       <Row gutter={16}>
         <Col span={16}>
