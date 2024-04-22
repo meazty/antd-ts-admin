@@ -11,6 +11,7 @@ import Create from './components/Create';
 import Show from './components/Show';
 import Recharge from './components/Recharge';
 import BatchUploadModal from './components/BatchUploadModal';
+import { Switch } from 'antd';
 
 /**
  * @en-US Add node
@@ -152,6 +153,24 @@ const TableList: React.FC = () => {
           </a>
         );
       },
+    },
+    {
+      title: '是否启用',
+      dataIndex: 'isActive',
+      hideInSearch: true,
+      render: (_, record) => (
+        <Switch
+          checkedChildren="启用"
+          unCheckedChildren="禁用"
+          checked={record.isActive}
+          onChange={(checked) => {
+            handleUpdate({ ...record, isActive: checked });
+            if (actionRef.current) {
+              actionRef.current.reload();
+            }
+          }}
+        />
+      ),
     },
     {
       title: '所属分组',

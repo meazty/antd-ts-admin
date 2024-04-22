@@ -27,6 +27,7 @@ declare namespace API {
   };
 
   type ItemData = {
+    isActive?: boolean;
     uploadedFile?: string;
     file?: string;
     user?: any;
