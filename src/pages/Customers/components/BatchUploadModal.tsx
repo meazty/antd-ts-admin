@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ModalForm, ProForm, ProFormTextArea } from '@ant-design/pro-components';
 import { Alert, Col, Collapse, Form, List, Radio, Row, Typography } from 'antd';
 import CategorySelector from './CategorySelector';
@@ -45,6 +45,10 @@ const BatchUploadModal: React.FC<Props> = ({ open, onOpenChange, onFinish, email
     return onFinish(formData); // 调用传入的onFinish，现在传入包含所有数据的formData
   };
 
+  useEffect(() => {
+    setLocalEmails(null);
+  }, [open]);
+
   return (
     <ModalForm
       title="批量上传"
@@ -60,7 +64,7 @@ const BatchUploadModal: React.FC<Props> = ({ open, onOpenChange, onFinish, email
         <Col span={16}>
           <ProForm.Item name="uploadType" label="上传类型">
             <RadioGroup onChange={(e) => setUploadType(e.target.value)} value={uploadType}>
-              <Radio value="text">批量邮箱（一行一个邮箱）</Radio>
+              <Radio value="text">批量邮箱</Radio>
               <Radio value="file">文件上传</Radio>
             </RadioGroup>
           </ProForm.Item>
@@ -78,6 +82,11 @@ const BatchUploadModal: React.FC<Props> = ({ open, onOpenChange, onFinish, email
           )}
           {uploadType === 'file' && (
             <>
+              <div style={{ marginBottom: '30px' }}>
+                <a href="https://email-backend.2024fc.xyz/api/static/customers.xlsx" download>
+                  下载模板
+                </a>
+              </div>
               <Form.Item required label="客户邮箱" name="emailFile">
                 <MyUpload
                   accept=".xls,.xlsx"

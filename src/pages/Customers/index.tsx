@@ -217,7 +217,7 @@ const TableList: React.FC = () => {
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
           </Button>,
           <Button
-            type="dashed"
+            danger
             key="batchUpload"
             onClick={() => {
               setBatchUploadModalOpen(true);
