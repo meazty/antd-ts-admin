@@ -1,6 +1,6 @@
 # antd-ts-admin
 
-![logo](https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/61aaf433-db5d-4a94-8808-89835f4689c6)
+<img src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/61aaf433-db5d-4a94-8808-89835f4689c6" alt="logo" width="200">
 
 A community-driven admin dashboard starter for React & Node.js, built with Ant Design 4, TypeScript, Node.js, MongoDB, and a comprehensive backend. It includes robust documentation and video tutorial support.
 
