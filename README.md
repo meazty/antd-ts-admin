@@ -83,4 +83,5 @@ Supports deployment to [Netlify](https://www.netlify.com/), [Vercel](https://ver
 
 ## Find me
 
-[twitter](https://twitter.com/qiuzhi99pro) [discord](https://discord.gg/YwusxuCp)
+- [twitter](https://twitter.com/qiuzhi99pro)
+- [discord](https://discord.gg/YwusxuCp)
