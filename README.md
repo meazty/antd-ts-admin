@@ -14,6 +14,25 @@ This template is:
 3. comes with a ton of features out of the box!
 4. focused on free, open-source services, where possible
 
+
+## Features
+
+- Backend Support(comming soon)
+- Built with [Ant Design 4](https://ant.design/) and [ProComponents](https://procomponents.ant.design/)
+- Comprehensive documentation support for various business functionalities.
+- i18n support.
+
+Demos:
+
+<img width="1906" alt="image" src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/4a664139-2341-4a8a-b77b-8f879d8bfba7">
+<img width="1683" alt="image" src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/3486038d-ffee-42aa-b71b-d7b792ccb816">
+<img width="1642" alt="image" src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/b2c3e073-b59a-480a-80ab-6d74de649674">
+<img width="1795" alt="image" src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/60ef42d5-1e7d-40e0-977d-14549b978ccb">
+<img width="1891" alt="image" src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/e9571ad9-f8d0-41ab-a280-7d7b20b00954">
+<img width="1767" alt="image" src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/d682c0f0-644d-472d-b2b9-d06b7ab9dfd3">
+<img width="1790" alt="image" src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/0d059553-ba6e-4756-be13-316911c217eb">
+
+
 ## Environment Prepare
 
 Install `node_modules`:
@@ -39,3 +58,7 @@ npm start
 ```bash
 npm run build
 ```
+
+## Deployment
+
+Supports deployment to [Netlify](https://www.netlify.com/), [Vercel](https://vercel.com/), and [Cloudflare pages](https://cloudflare.com)
