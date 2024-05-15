@@ -2,7 +2,7 @@
 
 <img src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/61aaf433-db5d-4a94-8808-89835f4689c6" alt="logo" width="200">
 
-A community-driven admin dashboard starter for React & Node.js, built with Ant Design 4, TypeScript, Node.js, MongoDB, and a comprehensive backend. It includes robust documentation and video tutorial support.
+An open-source, free, documentation-driven admin dashboard starter for React & Node.js, built with Ant Design v5, TypeScript, Node.js, MongoDB, and a comprehensive backend. It includes robust documentation and video tutorial support.
 
 <img width="1883" alt="image" src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/d563e47c-b728-4a79-89f7-58896d8de399">
 <img width="1778" alt="image" src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/7f9b9cc0-813f-4a92-b056-95ccbdf79366">
@@ -16,11 +16,10 @@ This template is:
 3. comes with a ton of features out of the box!
 4. focused on free, open-source services, where possible
 
-
 ## Features
 
 - Backend Support(comming soon)
-- Built with [Ant Design 4](https://ant.design/) and [ProComponents](https://procomponents.ant.design/)
+- Built with [Ant Design v5](https://ant.design/) and [ProComponents](https://procomponents.ant.design/)
 - Comprehensive documentation support for various business functionalities.
 - i18n support.
 - Batch import/export feature.
@@ -54,7 +53,6 @@ or
 yarn
 ```
 
-
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
@@ -81,5 +79,4 @@ Supports deployment to [Netlify](https://www.netlify.com/), [Vercel](https://ver
 
 ## Find me
 
-[twitter](https://twitter.com/qiuzhi99pro)
-[discord](https://discord.gg/YwusxuCp)
+[twitter](https://twitter.com/qiuzhi99pro) [discord](https://discord.gg/YwusxuCp)
