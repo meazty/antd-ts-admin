@@ -123,7 +123,7 @@ const Login: React.FC = () => {
             maxWidth: '75vw',
           }}
           logo={<img alt="logo" src="/logo.svg" />}
-          title="Admin"
+          title={process.env.UMI_APP_APP_NAME || 'antd-ts-admin'}
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           onFinish={async (values) => {
             await handleSubmit(values as API.LoginParams);

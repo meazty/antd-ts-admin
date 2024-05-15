@@ -4,7 +4,7 @@ import React from 'react';
 const Footer: React.FC = () => {
   return (
     <DefaultFooter
-      copyright="admin"
+      copyright={process.env.UMI_APP_APP_NAME || 'antd-ts-admin'}
       style={{
         background: 'none',
       }}

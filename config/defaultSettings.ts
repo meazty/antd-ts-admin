@@ -15,7 +15,7 @@ const Settings: ProLayoutProps & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'Admin',
+  title: process.env.UMI_APP_APP_NAME || 'antd-ts-admin',
   pwa: true,
   logo: '/logo.svg',
   iconfontUrl: '',
