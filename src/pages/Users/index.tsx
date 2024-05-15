@@ -1,5 +1,5 @@
 import { addItem, queryList, removeItem, updateItem } from '@/services/ant-design-pro/api';
-import { PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
 import { FooterToolbar, PageContainer, ProTable } from '@ant-design/pro-components';
 import { FormattedMessage, useAccess } from '@umijs/max';
@@ -161,7 +161,8 @@ const TableList: React.FC = () => {
             setCurrentRow(record);
           }}
         >
-          {intl.formatMessage({ id: 'edit' })}
+          <EditOutlined />
+          <FormattedMessage id="edit" defaultMessage="Edit" />
         </a>,
         access.canSuperAdmin && (
           <a
@@ -180,7 +181,8 @@ const TableList: React.FC = () => {
               });
             }}
           >
-            {intl.formatMessage({ id: 'delete' })}
+            <DeleteOutlined />
+            <FormattedMessage id="delete" defaultMessage="Delete" />
           </a>
         ),
       ],
