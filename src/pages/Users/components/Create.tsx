@@ -13,7 +13,7 @@ const Create: React.FC<Props> = (props) => {
   return (
     <ModalForm
       title={intl.formatMessage({ id: 'new' })}
-      width="400px"
+      width="50%"
       open={open}
       onOpenChange={onOpenChange}
       modalProps={{
