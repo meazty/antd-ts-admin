@@ -1,6 +1,6 @@
 # antd-ts-admin
 
-A community-driven admin dashboard starter for React & Node.js, featuring Ant Design 4, TypeScript, Node.js, MongoDB, and a comprehensive backend, with robust documentation and video tutorial support
+A community-driven admin dashboard starter for React & Node.js, built with Ant Design 4, TypeScript, Node.js, MongoDB, and a comprehensive backend. It includes robust documentation and video tutorial support.
 
 ## Environment Prepare
 
