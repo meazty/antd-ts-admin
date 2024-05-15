@@ -2,6 +2,7 @@ import React from 'react';
 import BasicForm from './BasicForm';
 import { ModalForm } from '@ant-design/pro-components';
 import { Form, Input } from 'antd';
+import { useIntl } from '@umijs/max';
 
 export type FormValueType = Partial<API.ItemData>;
 
@@ -15,10 +16,11 @@ export type UpdateFormProps = {
 };
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
+  const intl = useIntl();
   const { updateModalOpen, onCancel, onSubmit, values } = props;
   return (
     <ModalForm
-      title="修改"
+      title={intl.formatMessage({ id: 'modify' })}
       width="50%"
       modalProps={{
         destroyOnClose: true,
@@ -27,7 +29,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       open={updateModalOpen}
       onOpenChange={onCancel}
       onFinish={onSubmit}
-      initialValues={{ ...values, roleIds: values.roles?.map((role) => role.id) }}
+      initialValues={{ ...values }}
     >
       <BasicForm />
       <Form.Item name="_id" label={false}>

@@ -1,6 +1,6 @@
 import { ModalForm } from '@ant-design/pro-components';
 import BasicForm from './BasicForm';
-
+import { useIntl } from '@umijs/max';
 interface Props {
   open: boolean;
   onOpenChange: (visible: boolean) => void;
@@ -8,10 +8,11 @@ interface Props {
 }
 
 const Create: React.FC<Props> = (props) => {
+  const intl = useIntl();
   const { open, onOpenChange, onFinish } = props;
   return (
     <ModalForm
-      title="新增"
+      title={intl.formatMessage({ id: 'new' })}
       width="400px"
       open={open}
       onOpenChange={onOpenChange}

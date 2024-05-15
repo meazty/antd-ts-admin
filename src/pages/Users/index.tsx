@@ -9,7 +9,7 @@ import type { FormValueType } from './components/Update';
 import Update from './components/Update';
 import Create from './components/Create';
 import Show from './components/Show';
-import Recharge from './components/Recharge';
+import { useIntl } from '@umijs/max';
 
 /**
  * @en-US Add node
@@ -17,15 +17,19 @@ import Recharge from './components/Recharge';
  * @param fields
  */
 const handleAdd = async (fields: API.ItemData) => {
-  const hide = message.loading('正在添加');
+  const hide = message.loading(<FormattedMessage id="adding" defaultMessage="Adding..." />);
   try {
     await addItem('/users', { ...fields });
     hide();
-    message.success('Added successfully');
+    message.success(<FormattedMessage id="add.success" defaultMessage="Added successfully" />);
     return true;
   } catch (error: any) {
     hide();
-    message.error(error?.response?.data?.message ?? 'Adding failed, please try again!');
+    message.error(
+      error?.response?.data?.message ?? (
+        <FormattedMessage id="add.failed" defaultMessage="Adding failed, please try again!" />
+      ),
+    );
     return false;
   }
 };
@@ -37,31 +41,20 @@ const handleAdd = async (fields: API.ItemData) => {
  * @param fields
  */
 const handleUpdate = async (fields: FormValueType) => {
-  const hide = message.loading('正在更新');
+  const hide = message.loading(<FormattedMessage id="updating" defaultMessage="Updating..." />);
   try {
     await updateItem(`/users/${fields._id}`, fields);
     hide();
 
-    message.success('更新成功');
+    message.success(<FormattedMessage id="update.success" defaultMessage="Updated successfully" />);
     return true;
   } catch (error: any) {
     hide();
-    message.error(error?.response?.data?.message ?? '更新失败，请重试!');
-    return false;
-  }
-};
-
-const handleRecharge = async (fields: FormValueType) => {
-  const hide = message.loading('正在充值');
-  try {
-    await addItem(`/users/${fields._id}/recharge`, fields);
-    hide();
-
-    message.success('更新成功');
-    return true;
-  } catch (error: any) {
-    hide();
-    message.error(error?.response?.data?.message ?? '更新充值，请重试!');
+    message.error(
+      error?.response?.data?.message ?? (
+        <FormattedMessage id="update.failed" defaultMessage="Update failed, please try again!" />
+      ),
+    );
     return false;
   }
 };
@@ -73,23 +66,33 @@ const handleRecharge = async (fields: FormValueType) => {
  * @param selectedRows
  */
 const handleRemove = async (ids: string[]) => {
-  const hide = message.loading('正在删除');
+  const hide = message.loading(<FormattedMessage id="deleting" defaultMessage="Deleting..." />);
   if (!ids) return true;
   try {
     await removeItem('/users', {
       ids,
     });
     hide();
-    message.success('Deleted successfully and will refresh soon');
+    message.success(
+      <FormattedMessage
+        id="delete.success"
+        defaultMessage="Deleted successfully and will refresh soon"
+      />,
+    );
     return true;
   } catch (error: any) {
     hide();
-    message.error(error.response.data.message ?? 'Delete failed, please try again');
+    message.error(
+      error.response.data.message ?? (
+        <FormattedMessage id="delete.failed" defaultMessage="Delete failed, please try again" />
+      ),
+    );
     return false;
   }
 };
 
 const TableList: React.FC = () => {
+  const intl = useIntl();
   /**
    * @en-US Pop-up window of new window
    * @zh-CN 新建窗口的弹窗
@@ -106,7 +109,6 @@ const TableList: React.FC = () => {
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<API.ItemData>();
   const [selectedRowsState, setSelectedRows] = useState<API.ItemData[]>([]);
-  const [rechargeModalVisible, setRechargeModalVisible] = useState(false);
   const access = useAccess();
 
   /**
@@ -116,7 +118,7 @@ const TableList: React.FC = () => {
 
   const columns: ProColumns<API.ItemData>[] = [
     {
-      title: '邮箱',
+      title: intl.formatMessage({ id: 'email' }),
       dataIndex: 'email',
       copyable: true,
       render: (dom, entity) => {
@@ -133,18 +135,18 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: '姓名',
+      title: intl.formatMessage({ id: 'name' }),
       dataIndex: 'name',
     },
     {
-      title: '角色',
+      title: intl.formatMessage({ id: 'role' }),
       dataIndex: 'role',
       valueEnum: {
-        SUPER_ADMIN: '超级管理员',
-        CUSTOMER: '客户',
-        ORDER_CLERK: '下单员',
-        ADMIN: '客服',
-        FINANCIAL_STAFF: '财务人员',
+        SUPER_ADMIN: intl.formatMessage({ id: 'role.super_admin' }),
+        CUSTOMER: intl.formatMessage({ id: 'role.customer' }),
+        ORDER_CLERK: intl.formatMessage({ id: 'role.order_clerk' }),
+        ADMIN: intl.formatMessage({ id: 'role.admin' }),
+        FINANCIAL_STAFF: intl.formatMessage({ id: 'role.financial_staff' }),
       },
     },
     {
@@ -159,26 +161,26 @@ const TableList: React.FC = () => {
             setCurrentRow(record);
           }}
         >
-          编辑
+          {intl.formatMessage({ id: 'edit' })}
         </a>,
         access.canSuperAdmin && (
           <a
             key="delete"
             onClick={() => {
               return Modal.confirm({
-                title: '确认删除?',
+                title: intl.formatMessage({ id: 'confirm.delete' }),
                 onOk: async () => {
                   await handleRemove([record._id!]);
                   setSelectedRows([]);
                   actionRef.current?.reloadAndRest?.();
                 },
-                content: '确定删除吗？',
-                okText: '确认',
-                cancelText: '取消',
+                content: intl.formatMessage({ id: 'confirm.delete.content' }),
+                okText: intl.formatMessage({ id: 'confirm' }),
+                cancelText: intl.formatMessage({ id: 'cancel' }),
               });
             }}
           >
-            删除
+            {intl.formatMessage({ id: 'delete' })}
           </a>
         ),
       ],
@@ -188,7 +190,7 @@ const TableList: React.FC = () => {
   return (
     <PageContainer>
       <ProTable<API.ItemData, API.PageParams>
-        headerTitle="列表"
+        headerTitle={intl.formatMessage({ id: 'list' })}
         actionRef={actionRef}
         rowKey="_id"
         search={{
@@ -228,15 +230,15 @@ const TableList: React.FC = () => {
               danger
               onClick={() => {
                 return Modal.confirm({
-                  title: '确认删除?',
+                  title: intl.formatMessage({ id: 'confirm.delete' }),
                   onOk: async () => {
                     await handleRemove(selectedRowsState?.map((item) => item._id!));
                     setSelectedRows([]);
                     actionRef.current?.reloadAndRest?.();
                   },
-                  content: '确定删除吗？',
-                  okText: '确认',
-                  cancelText: '取消',
+                  content: intl.formatMessage({ id: 'confirm.delete.content' }),
+                  okText: intl.formatMessage({ id: 'confirm' }),
+                  cancelText: intl.formatMessage({ id: 'cancel' }),
                 });
               }}
             >
@@ -274,22 +276,6 @@ const TableList: React.FC = () => {
         }}
         onCancel={handleUpdateModalOpen}
         updateModalOpen={updateModalOpen}
-        values={currentRow || {}}
-      />
-
-      <Recharge
-        onSubmit={async (value) => {
-          const success = await handleRecharge(value);
-          if (success) {
-            setRechargeModalVisible(false);
-            setCurrentRow(undefined);
-            if (actionRef.current) {
-              actionRef.current.reload();
-            }
-          }
-        }}
-        onCancel={setRechargeModalVisible}
-        updateModalOpen={rechargeModalVisible}
         values={currentRow || {}}
       />
 
