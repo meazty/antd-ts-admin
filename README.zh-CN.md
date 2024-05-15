@@ -2,7 +2,7 @@
 
 <img src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/61aaf433-db5d-4a94-8808-89835f4689c6" alt="logo" width="200">
 
-这是一个由社区驱动的 React & Node.js 管理仪表板启动器，使用 Ant Design 4、TypeScript、Node.js、MongoDB 和一个全面的后端构建。它包括强大的文档和视频教程支持。
+一个基于 Ant Design v5、TypeScript、Node.js、MongoDB 和全面后端构建的开源、免费、以文档驱动的 React & Node.js 管理仪表板快速启动器。它包括健全的文档和视频教程支持。
 
 <img width="1883" alt="image" src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/d563e47c-b728-4a79-89f7-58896d8de399">
 <img width="1778" alt="image" src="https://github.com/hfpp2012copy/antd-ts-admin/assets/39046778/7f9b9cc0-813f-4a92-b056-95ccbdf79366">
@@ -19,7 +19,7 @@
 ## 特性
 
 - 后端支持（即将推出）
-- 使用 [Ant Design 4](https://ant.design/) 和 [ProComponents](https://procomponents.ant.design/) 构建
+- 使用 [Ant Design v5](https://ant.design/) 和 [ProComponents](https://procomponents.ant.design/) 构建
 - 对各种业务功能提供全面的文档支持。
 - 支持 i18n。
 - 批量导入/导出功能。
