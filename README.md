@@ -21,6 +21,8 @@ This template is:
 - Built with [Ant Design 4](https://ant.design/) and [ProComponents](https://procomponents.ant.design/)
 - Comprehensive documentation support for various business functionalities.
 - i18n support.
+- Batch import/export feature.
+- Supports cloud storage with S3 and OSS.
 
 Demos:
 
