@@ -122,7 +122,7 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="/logo1.png" />}
+          logo={<img alt="logo" src="/logo.svg" />}
           title="Admin"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           onFinish={async (values) => {

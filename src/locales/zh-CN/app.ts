@@ -29,4 +29,5 @@ export default {
   cancel: '取消',
   delete: '删除',
   list: '列表',
+  logout: '退出登录',
 };
